@@ -21,7 +21,8 @@ endif
 #----------------------------------------------------------------------------------
 
 CHART_DIR := install/helm/service-mesh-hub-enterprise
-OUTPUT_CHART_DIR := _output/helm/service-mesh-hub-enterprise
+OUTPUT_ROOT_DIR := _output
+OUTPUT_CHART_DIR := $(OUTPUT_ROOT_DIR)/helm/service-mesh-hub-enterprise
 
 .PHONY: set-version
 set-version:
@@ -40,4 +41,4 @@ publish-helm: set-version package-chart
 
 .PHONY: clean-helm
 clean-helm:
-	rm -rf $(CHART_DIR)/charts $(CHART_DIR)/requirements.lock $(CHART_DIR)/Chart.yaml $(OUTPUT_CHART_DIR)
+	rm -rf $(CHART_DIR)/charts $(CHART_DIR)/requirements.lock $(CHART_DIR)/Chart.yaml $(OUTPUT_ROOT_DIR)
