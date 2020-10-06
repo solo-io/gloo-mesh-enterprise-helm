@@ -21,7 +21,7 @@ endif
 #----------------------------------------------------------------------------------
 
 CHART_DIR := install/helm/service-mesh-hub-enterprise
-OUTPUT_CHART_DIR := $(CHART_DIR)/_output
+OUTPUT_CHART_DIR := _output/helm/service-mesh-hub-enterprise
 
 .PHONY: set-version
 set-version:
