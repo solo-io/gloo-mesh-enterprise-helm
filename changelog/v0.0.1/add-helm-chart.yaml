@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    description: Create helm chart containing SMH and SMH-UI subcharts.
+    issueLink: https://github.com/solo-io/service-mesh-hub-ui/issues/1289

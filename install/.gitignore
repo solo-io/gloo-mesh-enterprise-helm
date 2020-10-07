@@ -1,0 +1,4 @@
+charts/
+_output/
+requirements.lock
+Chart.yaml
