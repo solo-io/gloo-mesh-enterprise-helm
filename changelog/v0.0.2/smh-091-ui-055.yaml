@@ -1,0 +1,6 @@
+changelog:
+  - type: DEPENDENCY_BUMP
+    description: Update Service Mesh Hub and UI dependencies.
+    dependencyOwner: solo-io
+    dependencyRepo: service-mesh-hub
+    dependencyTag: v0.9.1
