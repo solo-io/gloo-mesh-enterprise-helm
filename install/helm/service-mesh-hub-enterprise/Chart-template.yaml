@@ -3,9 +3,6 @@ dependencies:
 - name: service-mesh-hub
   repository: https://storage.googleapis.com/service-mesh-hub/service-mesh-hub
   version: 0.9.1
-- name: cert-agent
-  repository: https://storage.googleapis.com/service-mesh-hub/cert-agent
-  version: 0.9.1
 - name: service-mesh-hub-ui
   repository: https://storage.googleapis.com/service-mesh-hub-enterprise/service-mesh-hub-ui
   version: 0.5.5
