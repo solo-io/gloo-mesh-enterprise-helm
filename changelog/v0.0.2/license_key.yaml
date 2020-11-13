@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/6
+    description: Add license key Kubernetes secret to chart.
