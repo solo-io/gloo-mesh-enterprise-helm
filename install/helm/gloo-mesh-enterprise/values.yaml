@@ -1,1 +1,5 @@
 license: # required
+
+include:
+  ui: true
+  rbac: true
