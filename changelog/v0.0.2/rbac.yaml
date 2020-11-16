@@ -1,0 +1,4 @@
+changelog:
+  - type: FEATURE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/10
+    description: Add RBAC Helm dependency and allow both that and the UI to be disabled via Helm value.
