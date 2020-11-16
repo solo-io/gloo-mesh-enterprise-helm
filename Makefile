@@ -20,9 +20,9 @@ endif
 # Helm
 #----------------------------------------------------------------------------------
 
-CHART_DIR := install/helm/service-mesh-hub-enterprise
+CHART_DIR := install/helm/gloo-mesh-enterprise
 OUTPUT_ROOT_DIR := _output
-OUTPUT_CHART_DIR := $(OUTPUT_ROOT_DIR)/helm/service-mesh-hub-enterprise
+OUTPUT_CHART_DIR := $(OUTPUT_ROOT_DIR)/helm/gloo-mesh-enterprise
 
 .PHONY: set-version
 set-version:
@@ -35,9 +35,9 @@ package-chart:
 
 .PHONY: publish-helm
 publish-helm: set-version package-chart
-	gsutil -m rsync -r gs://service-mesh-hub-enterprise/service-mesh-hub-enterprise $(OUTPUT_CHART_DIR)
+	gsutil -m rsync -r gs://gloo-mesh-enterprise/gloo-mesh-enterprise $(OUTPUT_CHART_DIR)
 	helm repo index $(OUTPUT_CHART_DIR)
-	gsutil -m rsync -r $(OUTPUT_CHART_DIR) gs://service-mesh-hub-enterprise/service-mesh-hub-enterprise
+	gsutil -m rsync -r $(OUTPUT_CHART_DIR) gs://gloo-mesh-enterprise/gloo-mesh-enterprise
 
 .PHONY: clean-helm
 clean-helm:
