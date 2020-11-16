@@ -1,8 +1,8 @@
-# Service Mesh Hub Enterprise Helm Charts
+# Gloo Mesh Enterprise Helm Chart
 
 ## Installation:
 ```shell script
-helm repo add service-mesh-hub-enterprise https://storage.googleapis.com/service-mesh-hub-enterprise/service-mesh-hub-enterprise
+helm repo add gloo-mesh-enterprise https://storage.googleapis.com/gloo-mesh-enterprise/gloo-mesh-enterprise
 helm repo update
-helm install smh-e service-mesh-hub-enterprise/service-mesh-hub-enterprise -n service-mesh-hub --set service-mesh-hub-ui.license.key=<your license key>
+helm install gloo-mesh-enterprise gloo-mesh-enterprise/gloo-mesh-enterprise -n gloo-mesh --set gloo-mesh-ui.license.key=<your license key>
 ```
