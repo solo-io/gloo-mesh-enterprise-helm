@@ -1,5 +1,9 @@
 license: # required
 
-include:
-  ui: true
-  rbac: true
+# Set to false to omit installing the Gloo Mesh UI
+gloo-mesh-ui:
+  enabled: true
+
+# Set to false to omit installing the RBAC webhook
+rbac-webhook:
+  enabled: true

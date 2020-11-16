@@ -29,7 +29,7 @@ set-version:
 	sed -e 's/%version%/'$(VERSION)'/' $(CHART_DIR)/Chart-template.yaml > $(CHART_DIR)/Chart.yaml
 
 .PHONY: package-chart
-package-chart:
+package-chart: set-version
 	helm dependency update $(CHART_DIR)
 	helm package --destination $(OUTPUT_CHART_DIR) $(CHART_DIR)
 
