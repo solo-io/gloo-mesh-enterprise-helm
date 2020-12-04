@@ -1,4 +1,4 @@
-license: # required
+licenseKey: # required
 
 # Set to false to omit installing the Gloo Mesh UI
 gloo-mesh-ui:
