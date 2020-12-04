@@ -1,0 +1,4 @@
+changelog:
+  - type: BREAKING_CHANGE
+    description: Use licenseKey as the field name for the license key.
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/15

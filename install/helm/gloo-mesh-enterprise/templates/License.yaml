@@ -5,4 +5,4 @@ metadata:
   name: gloo-mesh-enterprise-license
   namespace: {{ .Release.Namespace }}
 data:
-  key: {{ required "A Gloo Mesh Enterprise license key is required" .Values.license.key | b64enc | quote }}
+  key: {{ required "A Gloo Mesh Enterprise license key is required" .Values.licenseKey | b64enc | quote }}
