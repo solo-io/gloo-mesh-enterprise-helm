@@ -7,3 +7,10 @@ gloo-mesh-ui:
 # Set to false to omit installing the RBAC webhook
 rbac-webhook:
   enabled: true
+
+gloo-mesh:
+  settings:
+    networkingExtensionServers:
+      - address: enterprise-extender:9900
+        insecure: true
+        reconnectOnNetworkFailures: true

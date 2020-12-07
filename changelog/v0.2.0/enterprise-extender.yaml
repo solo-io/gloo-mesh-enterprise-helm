@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/14
+    description: Add enterprise-extender as a subchart. 
