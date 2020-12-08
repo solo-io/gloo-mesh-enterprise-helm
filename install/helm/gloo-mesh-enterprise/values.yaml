@@ -8,7 +8,7 @@ gloo-mesh-ui:
 rbac-webhook:
   enabled: true
 
-# Set to false to omit installing the Enterprise Extender
+# Set to false to omit installing the Gloo Mesh Enterprise Extender
 gloo-mesh-extender:
   enabled: true
 
