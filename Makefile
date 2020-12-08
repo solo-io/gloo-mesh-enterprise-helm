@@ -37,7 +37,7 @@ package-chart: set-version
 publish-helm: set-version package-chart
 	gsutil -m rsync -r gs://gloo-mesh-enterprise/gloo-mesh-enterprise $(OUTPUT_CHART_DIR)
 	helm repo index $(OUTPUT_CHART_DIR)
-	gsutil -m rsync -r $(OUTPUT_CHART_DIR) gs://gloo-mesh-enterprise/gloo-mesh-enterprise
+	gsutil -h "Cache-Control:no-cache,max-age=0" -m rsync -r $(OUTPUT_CHART_DIR) gs://gloo-mesh-enterprise/gloo-mesh-enterprise
 
 .PHONY: clean-helm
 clean-helm:
