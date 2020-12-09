@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    description: Bump chart apiversion to v2 to fix conditions on subcharts.
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/19
