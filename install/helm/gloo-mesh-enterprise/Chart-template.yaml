@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 dependencies:
 - name: gloo-mesh
   repository: https://storage.googleapis.com/gloo-mesh/gloo-mesh
