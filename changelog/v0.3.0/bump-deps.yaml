@@ -1,0 +1,4 @@
+changelog:
+  - type: BREAKING_CHANGE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/22
+    description: Bump all components to versions compatible with OSS 0.10.8.
