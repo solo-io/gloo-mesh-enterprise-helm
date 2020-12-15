@@ -1,0 +1,4 @@
+changelog:
+  - type: BREAKING_CHANGE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/28
+    description: Initial Gloo Mesh Enterprise beta release.
