@@ -9,11 +9,11 @@ dependencies:
   condition: gloo-mesh-ui.enabled
 - name: rbac-webhook
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/rbac-webhook
-  version: 0.2.1
+  version: 0.2.2
   condition: rbac-webhook.enabled
 - name: gloo-mesh-extender
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/enterprise-extender
-  version: 0.2.1
+  version: 0.2.2
   condition: gloo-mesh-extender.enabled
 description: Enterprise components for Gloo Mesh.
 home: https://docs.solo.io/gloo-mesh/

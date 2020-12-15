@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/26
+    description: Bump enterprise-extender to 0.2.2 to pick up new default Wasm Filter pull policy.
