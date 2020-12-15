@@ -1,0 +1,4 @@
+changelog:
+  - type: NEW_FEATURE
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/24
+    description: Bump OSS Gloo Mesh to 0.10.10 and all corresponding dependencies.
