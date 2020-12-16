@@ -1,0 +1,4 @@
+changelog:
+  - type: FIX
+    issueLink: https://github.com/solo-io/gloo-mesh/issues/1164
+    description: Bump gloo-mesh to 0.11.1 to pick up fix for gateway pod not starting after bounce.
