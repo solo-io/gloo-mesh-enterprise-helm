@@ -23,6 +23,7 @@ endif
 CHART_DIR := install/helm/gloo-mesh-enterprise
 OUTPUT_ROOT_DIR := _output
 OUTPUT_CHART_DIR := $(OUTPUT_ROOT_DIR)/helm/gloo-mesh-enterprise
+OUTPUT_CHART_PATH := "$(shell pwd)/$(OUTPUT_CHART_DIR)/gloo-mesh-enterprise-$(VERSION).tgz"
 
 .PHONY: set-version
 set-version:
@@ -42,3 +43,29 @@ publish-helm: set-version package-chart
 .PHONY: clean-helm
 clean-helm:
 	rm -rf $(CHART_DIR)/charts $(CHART_DIR)/requirements.lock $(CHART_DIR)/Chart.yaml $(OUTPUT_ROOT_DIR)
+
+#----------------------------------------------------------------------------------
+# Test
+#----------------------------------------------------------------------------------
+
+# ensures the versions of Go dependencies are aligned between gomod and Chart-template.yaml
+.PHONY: update-gomod
+update-gomod: install/helm/gloo-mesh-enterprise/Chart-template.yaml
+	go run ci/update_gomod.go
+
+# print the path to the output chart based on the current tag/version
+.PHONY: print-chart-path
+print-chart-path:
+	@echo $(OUTPUT_CHART_PATH)
+
+# run tests
+# depends on package-chart
+.PHONY: run-tests
+run-tests: update-gomod package-chart
+	OUTPUT_CHART_PATH=$(OUTPUT_CHART_PATH) ginkgo -r -failFast -trace $(GINKGOFLAGS) \
+		-ldflags=$(LDFLAGS) \
+		-gcflags=$(GCFLAGS) \
+		-progress \
+		-race \
+		-compilers=4 \
+		-skipPackage=$(SKIP_PACKAGES) $(TEST_PKG)

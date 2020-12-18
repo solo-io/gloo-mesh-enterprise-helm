@@ -18,4 +18,4 @@ dependencies:
 description: Enterprise components for Gloo Mesh.
 home: https://docs.solo.io/gloo-mesh/
 name: gloo-mesh-enterprise
-version: %version%
+version: "%version%"
