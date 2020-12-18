@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"strings"
 	"testing"
+	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -64,9 +65,16 @@ var _ = AfterSuite(func() {
 var _ = allTests()
 
 func allTests() bool {
-	return coretests.InitializeTests() &&
-		rbactests.InitializeTests() &&
+	/*
+		test order matters here:
+		- we run extender tests first because coretests modify settings (extender)
+		- we run rbac tests last as rbactests modify rbac
+	*/
+	return Describe("enterprise helm chart", func() {
 		extendertests.InitializeTests()
+		coretests.InitializeTests()
+		rbactests.InitializeTests()
+	})
 }
 
 func deployAndRegisterReleased() {
@@ -76,6 +84,9 @@ func deployAndRegisterReleased() {
 	Expect(err).NotTo(HaveOccurred())
 	err = registerCluster("remote-cluster")
 	Expect(err).NotTo(HaveOccurred())
+
+	// this sleep ensures rbac webhook certs are up to date before we start applying CRDs
+	time.Sleep(time.Second * 10)
 }
 
 func installEnterpriseChart() error {
@@ -108,6 +119,7 @@ func installEnterpriseChart() error {
 		"helm",
 		"upgrade",
 		"--install",
+		"--namespace=gloo-mesh",
 		"gloo-mesh-enterprise",
 		chartPath,
 		"--set",
