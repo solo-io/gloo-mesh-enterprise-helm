@@ -1,0 +1,4 @@
+changelog:
+  - type: NON_USER_FACING
+    issueLink: https://github.com/solo-io/gloo-mesh-enterprise-helm/issues/21
+    description: Import and run Gloo Mesh / Enterprise e2e tests as part of CI on pull requests.
