@@ -202,6 +202,13 @@ func runCommandOut(name string, args ...string) (string, error) {
 	cmd.Dir = moduleRoot
 
 	fullCommand := append([]string{name}, args...)
+	for _, arg := range args {
+		if len(arg) > 64 {
+			// silence license key in logs
+			arg = arg[:64] + "..."
+		}
+	}
+
 	log.Printf("running command %v", fullCommand)
 
 	if err := cmd.Run(); err != nil {
