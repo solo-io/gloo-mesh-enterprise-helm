@@ -21,6 +21,8 @@ replace (
 	github.com/Sirupsen/logrus => github.com/sirupsen/logrus v1.4.2
 	github.com/docker/docker => github.com/moby/moby v0.7.3-0.20190826074503-38ab9da00309
 
+	github.com/solo-io/gloo-mesh => github.com/solo-io/gloo-mesh v0.11.3-0.20201221205741-88184a17f4da
+
 	// needed until github.com/solo-io/wasm/tools/wasme/pkg
 	github.com/solo-io/go-utils => github.com/solo-io/go-utils v0.19.0
 

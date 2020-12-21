@@ -43,7 +43,7 @@ func TestIstio(t *testing.T) {
 // Before running tests, federate the two clusters by creating a VirtualMesh with mTLS enabled.
 var _ = BeforeSuite(func() {
 	ensureWorkingDirectory()
-	coretests.SetupClustersAndFederation(deployAndRegisterReleased)
+	coretests.SetupClustersAndFederation(deployAndRegisterEnterprise)
 })
 
 func ensureWorkingDirectory() {
@@ -77,7 +77,7 @@ func allTests() bool {
 	})
 }
 
-func deployAndRegisterReleased() {
+func deployAndRegisterEnterprise() {
 	err := installEnterpriseChart()
 	Expect(err).NotTo(HaveOccurred())
 	err = registerCluster("mgmt-cluster")
@@ -85,8 +85,11 @@ func deployAndRegisterReleased() {
 	err = registerCluster("remote-cluster")
 	Expect(err).NotTo(HaveOccurred())
 
+	err = applyCustomBootstrapPatch("remote-cluster", "bookinfo", "reviews-v3")
+	Expect(err).NotTo(HaveOccurred())
+
 	// this sleep ensures rbac webhook certs are up to date before we start applying CRDs
-	time.Sleep(time.Second * 10)
+	time.Sleep(time.Second * 20)
 }
 
 func installEnterpriseChart() error {
@@ -182,8 +185,33 @@ func getApiserverAddress(cluster string) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		return addr + ":6443", nil
+		return strings.TrimSpace(addr) + ":6443", nil
 	}
+}
+
+func applyCustomBootstrapPatch(clusterName, namespace, deploymentName string) error {
+	if _, err := runCommandInOut(
+		"kubectl",
+		customBootsrapConfigmap(namespace),
+		"--context=kind-"+clusterName,
+		"-f", "-",
+	); err != nil {
+		return err
+	}
+
+	if err := runCommand(
+		"kubectl",
+		"patch",
+		"deployment",
+		"-n", namespace,
+		deploymentName,
+		"--context=kind-"+clusterName,
+		fmt.Sprintf("--patch='%v'", customBootstrapOverridePatch),
+	); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func runCommand(name string, args ...string) error {
@@ -193,12 +221,20 @@ func runCommand(name string, args ...string) error {
 
 // always runs command from module root
 func runCommandOut(name string, args ...string) (string, error) {
+	return runCommandInOut(name, "", args...)
+}
+
+// always runs command from module root
+func runCommandInOut(name, stdin string, args ...string) (string, error) {
 	out := &bytes.Buffer{}
 
 	cmd := exec.Command(
 		name,
 		args...,
 	)
+	if stdin != "" {
+		cmd.Stdin = bytes.NewBuffer([]byte(stdin))
+	}
 	cmd.Stdout = io.MultiWriter(out, GinkgoWriter)
 	cmd.Stderr = io.MultiWriter(out, GinkgoWriter)
 	cmd.Dir = moduleRoot
