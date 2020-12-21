@@ -3,6 +3,8 @@ package istio_test
 import (
 	"bytes"
 	"fmt"
+	"github.com/solo-io/gloo-mesh-enterprise-helm/test/e2e/istio/pkg"
+	"github.com/solo-io/gloo-mesh/test/extensions"
 	"io"
 	"log"
 	"os"
@@ -11,7 +13,6 @@ import (
 	"runtime"
 	"strings"
 	"testing"
-	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -34,6 +35,7 @@ func TestIstio(t *testing.T) {
 		return
 	}
 	RegisterFailHandler(func(message string, callerSkip ...int) {
+		log.Printf("Failed with message: %v", message)
 		utils.RunShell(util.GetModuleRoot() + "/ci/print-kind-info.sh")
 		Fail(message, callerSkip...)
 	})
@@ -78,6 +80,9 @@ func allTests() bool {
 }
 
 func deployAndRegisterEnterprise() {
+	// override Docker Host Addr for CircleCI
+	extensions.DockerHostAddress = pkg.DockerHostAddress
+
 	err := installEnterpriseChart()
 	Expect(err).NotTo(HaveOccurred())
 	err = registerCluster("mgmt-cluster")
@@ -87,9 +92,6 @@ func deployAndRegisterEnterprise() {
 
 	err = applyCustomBootstrapPatch("remote-cluster", "bookinfo", "reviews-v3")
 	Expect(err).NotTo(HaveOccurred())
-
-	// this sleep ensures rbac webhook certs are up to date before we start applying CRDs
-	time.Sleep(time.Second * 20)
 }
 
 func installEnterpriseChart() error {
@@ -192,9 +194,10 @@ func getApiserverAddress(cluster string) (string, error) {
 func applyCustomBootstrapPatch(clusterName, namespace, deploymentName string) error {
 	if _, err := runCommandInOut(
 		"kubectl",
-		customBootsrapConfigmap(namespace),
+		pkg.CustomBootsrapConfigmap(namespace),
 		"--context=kind-"+clusterName,
-		"-f", "-",
+		"apply",
+		"-f-",
 	); err != nil {
 		return err
 	}
@@ -206,7 +209,7 @@ func applyCustomBootstrapPatch(clusterName, namespace, deploymentName string) er
 		"-n", namespace,
 		deploymentName,
 		"--context=kind-"+clusterName,
-		fmt.Sprintf("--patch='%v'", customBootstrapOverridePatch),
+		fmt.Sprintf("--patch=%v", pkg.CustomBootstrapOverridePatch),
 	); err != nil {
 		return err
 	}

@@ -1,9 +1,9 @@
-package istio_test
+package pkg
 
 import "fmt"
 
 // the custom bootstrap configmap that must be attached to deployments that get wasm filters
-func customBootsrapConfigmap(namespace string) string {
+func CustomBootsrapConfigmap(namespace string) string {
 	return fmt.Sprintf(`apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -62,4 +62,4 @@ data:
 `, namespace)
 }
 
-const customBootstrapOverridePatch = `{"spec":{"template": {"metadata": {"annotations": {"sidecar.istio.io/bootstrapOverride": "gloo-mesh-custom-envoy-bootstrap"}}}}}`
+const CustomBootstrapOverridePatch = `{"spec":{"template": {"metadata": {"annotations": {"sidecar.istio.io/bootstrapOverride": "gloo-mesh-custom-envoy-bootstrap"}}}}}`
