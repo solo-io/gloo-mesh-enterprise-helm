@@ -1,0 +1,62 @@
+version: 2.1
+orbs:
+  helm: circleci/helm@1.1.2
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+      # need to upgrade plan before using large executor
+      resource_class: large
+    working_directory: ~/go/src/github.com/solo-io/gloo-mesh-enterprise-helm
+    steps:
+      - checkout
+      - helm/install-helm-client:
+          version: v3.2.4
+      - run:
+          name: install go
+          command: |
+            sudo rm -rf /usr/local/go && \
+            wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz && \
+            tar -xvf go1.15.6.linux-amd64.tar.gz && sudo mv go /usr/local/go && \
+            export GOROOT=/usr/local/go && \
+            export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+      - run:
+          name: install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+      - run:
+          name: install kind
+          command: |
+            curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.8.1/kind-linux-amd64
+            chmod +x ./kind
+            sudo mv ./kind /usr/local/bin/
+      - run:
+          name: setup private repo permissions
+          command: |
+            git config --global url."https://${GITHUB_TOKEN}@github.com/solo-io/".insteadOf "https://github.com/solo-io/"
+      - run:
+          name: e2e tests
+          no_output_timeout: 30m
+          environment:
+            # todo: move ISTIOCTL_BINARY to matrix once we start testing against more versions of istio
+            ISTIOCTL_BINARY: 'https://github.com/istio/istio/releases/download/1.8.1/istio-1.8.1-linux-amd64.tar.gz'
+          command: |
+            make print-version
+
+            go install github.com/onsi/ginkgo/ginkgo
+
+            # install istioctl
+            ISTIO_VERSION=istio-$(echo $ISTIOCTL_BINARY | grep -o "download/.*/" | sed 's/\bdownload\b//g' |  sed 's/[\/]//g')
+            curl -sSL $ISTIOCTL_BINARY | tar -xzf - $ISTIO_VERSION/bin/istioctl
+            # move istio binary to _output, which is gitignored, to avoid `-dirty` suffix when computing version in subsequent makefile invocations
+            mkdir _output && mv $ISTIO_VERSION _output/$ISTIO_VERSION
+            export PATH=$PWD/_output/$ISTIO_VERSION/bin:$PATH
+            istioctl version
+
+            # meshctl install
+            GLOO_MESH_VERSION=$(go list -f '{{ .Module.Version }}' github.com/solo-io/gloo-mesh/test/e2e/istio/pkg/tests) curl -sL https://run.solo.io/meshctl/install | sh
+            export PATH=$HOME/.gloo-mesh/bin:$PATH
+
+            make run-tests GINKGOFLAGS=-v RUN_E2E=1

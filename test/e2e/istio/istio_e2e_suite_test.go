@@ -178,7 +178,7 @@ func getApiserverAddress(cluster string) (string, error) {
 	case "darwin":
 		return "host.docker.internal", nil
 	default:
-		addr, err := runCommandOut("bash", "-c", `docker exec `+cluster+`-control-plane" ip addr show dev eth0 | sed -nE 's|\s*inet\s+([0-9.]+).*|\1|p'`)
+		addr, err := runCommandOut("bash", "-c", `docker exec `+cluster+`-control-plane ip addr show dev eth0 | sed -nE 's|\s*inet\s+([0-9.]+).*|\1|p'`)
 		if err != nil {
 			return "", err
 		}
