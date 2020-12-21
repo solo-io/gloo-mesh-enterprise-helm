@@ -124,6 +124,8 @@ func installEnterpriseChart() error {
 		chartPath,
 		"--set",
 		"licenseKey="+licenseKey,
+		"--set",
+		"gloo-mesh-ui.enabled=false", // disable apiserver/UI to free up compute for CI
 	); err != nil {
 		return err
 	}
