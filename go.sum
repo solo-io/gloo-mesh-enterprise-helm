@@ -1120,8 +1120,9 @@ github.com/solo-io/anyvendor v0.0.1 h1:csAXLNLkUQWlr/ll4tgmc+Id9kHw2ibncf35weg03
 github.com/solo-io/anyvendor v0.0.1/go.mod h1:SLucIeU8qBOYI82BveNVn2LzZFcMWJSCf8Kd1S4Jcr4=
 github.com/solo-io/external-apis v0.1.1 h1:QEq7OWR6KEwECXyakgX3skWl3YCg1ZcpviCQXPSY7t4=
 github.com/solo-io/external-apis v0.1.1/go.mod h1:1rwOxotZzR94AtuSA1MTTDG8gaY4ms+KhlH4/+XeLhM=
-github.com/solo-io/gloo-mesh v0.11.3-0.20201221231734-251c0a12e9df h1:bIXCEkbfVbX/E/8zniQwTYwEXDIZUIFlhN+MmXtJGdk=
-github.com/solo-io/gloo-mesh v0.11.3-0.20201221231734-251c0a12e9df/go.mod h1:SYBnnEv0iqCe2jdKpAjBAeGuBMVzzaj6qXbMyCenRSo=
+github.com/solo-io/gloo-mesh v0.11.0/go.mod h1:35xpSKtOz/0ZDXsz0n27MSg06dL+NlfV6AkkUrwiBmg=
+github.com/solo-io/gloo-mesh v0.11.3 h1:DbQZKEeUsIeEHXLakoY5yU1ZwPPgeWToa6tcChEN80I=
+github.com/solo-io/gloo-mesh v0.11.3/go.mod h1:SYBnnEv0iqCe2jdKpAjBAeGuBMVzzaj6qXbMyCenRSo=
 github.com/solo-io/gloo-mesh-enterprise v0.3.4 h1:GIH3Mn418FfYYAPIz6d1n6ametJBjAPDWcK4m78r+ZQ=
 github.com/solo-io/gloo-mesh-enterprise v0.3.4/go.mod h1:krcqqhXwVH0XtM0HeNG21sxS9lZwwXKED9196xM/6Og=
 github.com/solo-io/go-utils v0.19.0 h1:MoXeilk74K32iPKgfnfftQk4iz6mGRqz7c3liNLiz3Y=
