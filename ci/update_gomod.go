@@ -11,7 +11,7 @@ import (
 	"github.com/solo-io/skv2/codegen/util"
 )
 
-// this file is a Go script which udpates the go.mod file to match the contents of Chart-template.yaml
+// this file is a Go script which updates the go.mod file to match the contents of Chart-template.yaml
 
 const (
 	glooMeshDependencyName          = "gloo-mesh"
