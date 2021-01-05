@@ -51,7 +51,7 @@ clean-helm:
 # ensures the versions of Go dependencies are aligned between gomod and Chart-template.yaml
 .PHONY: update-gomod
 update-gomod: install/helm/gloo-mesh-enterprise/Chart-template.yaml
-	go run ci/update_gomod.go
+	GOPRIVATE=github.com/solo-io go run ci/update_gomod.go
 
 # print the path to the output chart based on the current tag/version
 .PHONY: print-chart-path
