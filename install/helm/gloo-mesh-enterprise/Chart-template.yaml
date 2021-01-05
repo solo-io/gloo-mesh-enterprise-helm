@@ -5,15 +5,15 @@ dependencies:
   version: 0.11.3
 - name: gloo-mesh-ui
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/gloo-mesh-ui
-  version: 0.9.0
+  version: 0.9.1
   condition: gloo-mesh-ui.enabled
 - name: rbac-webhook
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/rbac-webhook
-  version: 0.3.4
+  version: 0.3.6
   condition: rbac-webhook.enabled
 - name: gloo-mesh-extender
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/enterprise-extender
-  version: 0.3.4
+  version: 0.3.6
   condition: gloo-mesh-extender.enabled
 description: Enterprise components for Gloo Mesh.
 home: https://docs.solo.io/gloo-mesh/
