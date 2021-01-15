@@ -5,12 +5,12 @@ go 1.15
 require (
 	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32
 	github.com/onsi/ginkgo v1.13.0
-	github.com/onsi/gomega v1.10.1
+	github.com/onsi/gomega v1.10.2
 	github.com/rotisserie/eris v0.4.0
-	github.com/solo-io/gloo-mesh v0.11.3
-	github.com/solo-io/gloo-mesh-enterprise v0.3.4
+	github.com/solo-io/gloo-mesh v0.12.0
+	github.com/solo-io/gloo-mesh-enterprise v0.4.0
 	github.com/solo-io/go-utils v0.20.0
-	github.com/solo-io/skv2 v0.15.2
+	github.com/solo-io/skv2 v0.16.0
 )
 
 replace (
@@ -29,6 +29,10 @@ replace (
 
 	google.golang.org/genproto => google.golang.org/genproto v0.0.0-20200513103714-09dca8ec2884
 
-	k8s.io/client-go => k8s.io/client-go v0.18.6
+	k8s.io/api => k8s.io/api v0.18.14
+	k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.18.14
+	k8s.io/apimachinery => k8s.io/apimachinery v0.18.14
+	k8s.io/client-go => k8s.io/client-go v0.18.14
+	k8s.io/kubectl => k8s.io/kubectl v0.18.14
 
 )
