@@ -171,6 +171,9 @@ func registerCluster(cluster string) error {
 		"--cluster-name="+cluster,
 		"--remote-context=kind-"+cluster,
 		"--api-server-address="+apiServerAddr,
+		"--install-wasm-agent",
+		// TODO joekelley remove this line when we release enterprise-networking
+		"--wasm-agent-chart-file https://storage.googleapis.com/gloo-mesh-enterprise/wasm-agent/wasm-agent-"+"0.5.0"+".tgz",
 	); err != nil {
 		return err
 	}
