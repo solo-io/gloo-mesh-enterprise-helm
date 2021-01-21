@@ -28,11 +28,4 @@ replace (
 	golang.org/x/sys => golang.org/x/sys v0.0.0-20200826173525-f9321e4c35a6
 
 	google.golang.org/genproto => google.golang.org/genproto v0.0.0-20200513103714-09dca8ec2884
-
-	k8s.io/api => k8s.io/api v0.18.14
-	k8s.io/apiextensions-apiserver => k8s.io/apiextensions-apiserver v0.18.14
-	k8s.io/apimachinery => k8s.io/apimachinery v0.18.14
-	k8s.io/client-go => k8s.io/client-go v0.18.14
-	k8s.io/kubectl => k8s.io/kubectl v0.18.14
-
 )
