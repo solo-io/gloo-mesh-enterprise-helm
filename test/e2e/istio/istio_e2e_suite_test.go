@@ -3,8 +3,6 @@ package istio_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/solo-io/gloo-mesh-enterprise-helm/test/e2e/istio/pkg"
-	"github.com/solo-io/gloo-mesh/test/extensions"
 	"io"
 	"log"
 	"os"
@@ -14,10 +12,12 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/solo-io/gloo-mesh-enterprise-helm/test/e2e/istio/pkg"
+	"github.com/solo-io/gloo-mesh/test/extensions"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/rotisserie/eris"
-	extendertests "github.com/solo-io/gloo-mesh-enterprise/enterprise-extender/test/e2e/istio/pkg/tests"
 	rbactests "github.com/solo-io/gloo-mesh-enterprise/rbac-webhook/test/e2e/pkg/tests"
 	coretests "github.com/solo-io/gloo-mesh/test/e2e/istio/pkg/tests"
 	"github.com/solo-io/gloo-mesh/test/utils"
@@ -73,7 +73,7 @@ func allTests() bool {
 		- we run rbac tests last as rbactests modify rbac
 	*/
 	return Describe("enterprise helm chart", func() {
-		extendertests.InitializeTests()
+		// extendertests.InitializeTests()
 		coretests.InitializeTests()
 		rbactests.InitializeTests()
 	})
