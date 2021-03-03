@@ -44,6 +44,7 @@ func TestIstio(t *testing.T) {
 // Before running tests, federate the two clusters by creating a VirtualMesh with mTLS enabled.
 var _ = BeforeSuite(func() {
 	ensureWorkingDirectory()
+	// deployAndRegisterEnterprise()
 	coretests.SetupClustersAndFederation(deployAndRegisterEnterprise)
 })
 
