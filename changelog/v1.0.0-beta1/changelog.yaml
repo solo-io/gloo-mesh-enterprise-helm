@@ -1,5 +1,0 @@
-changelog:
- - type: NON_USER_FACING
-   issueLink: https://github.com/solo-io/gloo-mesh-enterprise/issues/168
-   resolvesIssue: false
-   description: Add empty Google Cloud Build config so changelog bot runs on release.
