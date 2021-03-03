@@ -45,7 +45,7 @@ func TestIstio(t *testing.T) {
 var _ = BeforeSuite(func() {
 	ensureWorkingDirectory()
 	// deployAndRegisterEnterprise()
-	coretests.SetupClustersAndFederation(deployAndRegisterEnterprise)
+	// coretests.SetupClustersAndFederation(deployAndRegisterEnterprise)
 })
 
 func ensureWorkingDirectory() {
