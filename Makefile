@@ -49,11 +49,6 @@ clean-helm:
 # Test
 #----------------------------------------------------------------------------------
 
-# ensures the versions of Go dependencies are aligned between gomod and Chart-template.yaml
-.PHONY: update-gomod
-update-gomod: install/helm/gloo-mesh-enterprise/Chart-template.yaml
-	GOPRIVATE=github.com/solo-io go run ci/update_gomod.go
-
 # print the path to the output chart based on the current tag/version
 .PHONY: print-chart-path
 print-chart-path:
@@ -62,7 +57,7 @@ print-chart-path:
 # run tests
 # depends on package-chart
 .PHONY: run-tests
-run-tests: update-gomod package-chart
+run-tests: set-version package-chart
 	OUTPUT_CHART_PATH=$(OUTPUT_CHART_PATH) ginkgo -r -failFast -trace $(GINKGOFLAGS) \
 		-ldflags=$(LDFLAGS) \
 		-gcflags=$(GCFLAGS) \
