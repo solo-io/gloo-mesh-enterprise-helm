@@ -136,9 +136,7 @@ func installEnterpriseChart() error {
 	}
 
 	for _, deployment := range []string{
-		"discovery",
-		"networking",
-		"enterprise-extender",
+		"enterprise-networking",
 		"rbac-webhook",
 	} {
 		if err := runCommand(
