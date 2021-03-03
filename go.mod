@@ -6,9 +6,9 @@ require (
 	github.com/onsi/ginkgo v1.15.0
 	github.com/onsi/gomega v1.10.5
 	github.com/rotisserie/eris v0.5.0
-	github.com/solo-io/gloo-mesh v1.0.0-beta4
-	github.com/solo-io/gloo-mesh-enterprise v1.0.0-beta5
-	github.com/solo-io/go-utils v0.20.4
+	github.com/solo-io/gloo-mesh v1.0.0-beta6
+	github.com/solo-io/gloo-mesh-enterprise v1.0.0-beta6
+	github.com/solo-io/go-utils v0.20.5
 	github.com/solo-io/skv2 v0.17.7
 )
 
