@@ -45,16 +45,11 @@ func run() error {
 	var versions subchartVersions
 	for _, dep := range chartContents.Dependencies {
 		switch dep.Name {
-		case glooMeshDependencyName:
-			versions.glooMesh = dep.Version
 		case glooMeshEnerpriseDependencyName:
 			versions.glooMeshEnterprise = dep.Version
 		}
 	}
 
-	if versions.glooMesh == "" {
-		return eris.Errorf("no gloo-mesh version found")
-	}
 	if versions.glooMeshEnterprise == "" {
 		return eris.Errorf("no gloo-mesh-enterprise version found")
 	}
@@ -64,13 +59,11 @@ func run() error {
 
 // the versions of subcharts we import
 type subchartVersions struct {
-	glooMesh           string
 	glooMeshEnterprise string
 }
 
 func (v subchartVersions) updateGoMod() error {
 	for repo, version := range map[string]string{
-		glooMeshRepo:           v.glooMesh,
 		glooMeshEnterpriseRepo: v.glooMeshEnterprise,
 	} {
 		if err := goGet(repo, version); err != nil {

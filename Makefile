@@ -24,10 +24,11 @@ CHART_DIR := install/helm/gloo-mesh-enterprise
 OUTPUT_ROOT_DIR := _output
 OUTPUT_CHART_DIR := $(OUTPUT_ROOT_DIR)/helm/gloo-mesh-enterprise
 OUTPUT_CHART_PATH := "$(shell pwd)/$(OUTPUT_CHART_DIR)/gloo-mesh-enterprise-$(VERSION).tgz"
+ENTERPRISE_VERSION := $(shell go list -f '{{ .Version }}' -m github.com/solo-io/gloo-mesh-enterprise | cut -c 2-)
 
 .PHONY: set-version
 set-version:
-	sed -e 's/%version%/'$(VERSION)'/' $(CHART_DIR)/Chart-template.yaml > $(CHART_DIR)/Chart.yaml
+	sed -e 's/%version%/'$(VERSION)'/' -e 's/%enterprise_version%/'$(ENTERPRISE_VERSION)'/' $(CHART_DIR)/Chart-template.yaml > $(CHART_DIR)/Chart.yaml
 
 .PHONY: package-chart
 package-chart: set-version

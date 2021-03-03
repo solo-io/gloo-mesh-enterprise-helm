@@ -2,14 +2,14 @@ apiVersion: v2
 dependencies:
 - name: enterprise-networking
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/enterprise-networking
-  version: v1.0.0-beta5
+  version: "%enterprise_version%"
 - name: gloo-mesh-ui
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/gloo-mesh-ui
   version: 0.10.8-patch1
   condition: gloo-mesh-ui.enabled
 - name: rbac-webhook
   repository: https://storage.googleapis.com/gloo-mesh-enterprise/rbac-webhook
-  version: v1.0.0-beta5
+  version: "%enterprise_version%"
   condition: rbac-webhook.enabled
 description: Enterprise components for Gloo Mesh.
 home: https://docs.solo.io/gloo-mesh/
