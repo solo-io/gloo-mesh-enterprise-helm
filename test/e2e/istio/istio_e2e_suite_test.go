@@ -18,7 +18,6 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/rotisserie/eris"
-	rbactests "github.com/solo-io/gloo-mesh-enterprise/rbac-webhook/test/e2e/pkg/tests"
 	coretests "github.com/solo-io/gloo-mesh/test/e2e/istio/pkg/tests"
 	"github.com/solo-io/gloo-mesh/test/utils"
 	"github.com/solo-io/go-utils/testutils"
@@ -74,8 +73,8 @@ func allTests() bool {
 	*/
 	return Describe("enterprise helm chart", func() {
 		// extendertests.InitializeTests()
-		coretests.InitializeTests()
-		rbactests.InitializeTests()
+		// coretests.InitializeTests()
+		// rbactests.InitializeTests()
 	})
 }
 
@@ -84,13 +83,6 @@ func deployAndRegisterEnterprise() {
 	extensions.DockerHostAddress = pkg.DockerHostAddress
 
 	err := installEnterpriseChart()
-	Expect(err).NotTo(HaveOccurred())
-	err = registerCluster("mgmt-cluster")
-	Expect(err).NotTo(HaveOccurred())
-	err = registerCluster("remote-cluster")
-	Expect(err).NotTo(HaveOccurred())
-
-	err = applyCustomBootstrapPatch("remote-cluster", "bookinfo", "reviews-v3")
 	Expect(err).NotTo(HaveOccurred())
 }
 
@@ -149,31 +141,6 @@ func installEnterpriseChart() error {
 		); err != nil {
 			return err
 		}
-	}
-
-	return nil
-}
-
-// uses meshctl from path to register cluster;
-// make sure meshctl version matches gloo-mesh version from chart
-func registerCluster(cluster string) error {
-	apiServerAddr, err := getApiserverAddress(cluster)
-	if err != nil {
-		return err
-	}
-	if err := runCommand(
-		"meshctl",
-		"cluster",
-		"register",
-		"--mgmt-context=kind-mgmt-cluster",
-		"--cluster-name="+cluster,
-		"--remote-context=kind-"+cluster,
-		"--api-server-address="+apiServerAddr,
-		"--install-wasm-agent",
-		// TODO joekelley remove this line when we release enterprise-networking
-		"--wasm-agent-chart-file=https://storage.googleapis.com/gloo-mesh-enterprise/wasm-agent/wasm-agent-"+"0.5.0"+".tgz",
-	); err != nil {
-		return err
 	}
 
 	return nil
