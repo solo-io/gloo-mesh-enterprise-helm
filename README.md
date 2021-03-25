@@ -1,4 +1,6 @@
-# Gloo Mesh Enterprise Helm Chart
+# Gloo Mesh Enterprise Helm Chart (Deprecated)
+
+This repository has been deprecated. See the Gloo Mesh docs for Enterprise Helm documentation: https://docs.solo.io/gloo-mesh/latest/reference/helm/.
 
 ## Installation:
 ```shell script
